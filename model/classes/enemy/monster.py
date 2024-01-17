@@ -27,6 +27,8 @@ class Monster:
                 self.stamina -= 3
             if player.pv < 0:
                 player.pv = 0
+    
+    def __str__(self) :
+        return f"{self.role} (Lvl {self.lvl}) - PV: {self.pv}/{self.pv_max} - Mana: {self.mana}/{self.mana_max} - Stamina: {self.stamina}/{self.stamina_max} - Attack: {self.attack}"
 
-    def __str__(self) -> str:
-            return f'{self.role}'
+

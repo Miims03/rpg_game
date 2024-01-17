@@ -49,9 +49,9 @@ class Game():
             return self
     
     def changeClassWarrior(self):
-        if self.lvl >= 20:
-            newWarrior = Warrior(self.name)
-            newWarrior.lvl = self.lvl
+        if self.player.lvl >= 20:
+            newWarrior = Warrior(self.player.name)
+            newWarrior.lvl = self.player.lvl
             return newWarrior
         else:
             print("Vous n'avez pas le niveau requis")
@@ -69,11 +69,18 @@ class Game():
             case _:
                 print("PAS A VOIR !!!")
                 
+    def is_someone_dead(self):
+        if self.monster.pv <=0 or self.player.pv<=0:
+            return True
+        return False               
+                
     def combat(self):
-        print(f"\nPv {self.player.name} : {self.player.pv}\nStamina {self.player.name} : {self.player.stamina}\nMana {self.player.name} : {self.player.mana}\nNombre d'armure : {self.player.numArmors}\nArmure : {self.player.armors}\n")
-        print(f'Pv {self.monster.role} : {self.monster.pv}\nStamina {self.monster.role} : {self.monster.stamina}\n')
+        #print(f"\nPv {self.player.name} : {self.player.pv}\nStamina {self.player.name} : {self.player.stamina}\nMana {self.player.name} : {self.player.mana}\nNombre d'armure : {self.player.numArmors}\nArmure : {self.player.armors}\n")
+        #print(f'Pv {self.monster.role} : {self.monster.pv}\nStamina {self.monster.role} : {self.monster.stamina}\n')
         if self.player.role == 'Novice':
-            while self.monster.pv >=0:           
+            while not self.is_someone_dead():
+                print(self.player)
+                print(self.monster)           
                 action = input("What do you want to do ? [attack] :\n")
                 match action.lower():
                     case 'attack':
@@ -86,8 +93,6 @@ class Game():
                         print("MAUVAISE INPUT")
                         pass
                 
-                print(f"Pv {self.player.name} : {self.player.pv}\nStamina {self.player.name} : {self.player.stamina}\nMana {self.player.name} : {self.player.mana}\nNombre d'armure : {self.player.numArmors}\nArmure : {self.player.armors}\n")
-                print(f'Pv {self.monster.role} : {self.monster.pv}\nStamina {self.monster.role} : {self.monster.stamina}\n')
 
         # if self.player.role == 'Warrior':
         #     while self.monster.pv >=0:           

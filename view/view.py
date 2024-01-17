@@ -1,41 +1,31 @@
 #view.py
 from model.game import Game
-from prettytable import PrettyTable
 
 class View():
     
     def __init__(self,game : 'Game'):
         self.game = game
-        self.table = PrettyTable()
+        
+    def display_players_and_enemies(self,players, enemies):
+        max_length = max(len(players), len(enemies))
+
+        print(f"{'Joueurs':<20}{'':<20}{'Ennemis':<20}")
+        print('-' * 60)
+
+        for i in range(max_length):
+            player_str = ""
+            enemy_str = ""
+
+            if i < len(players):
+                player_str = str(players[i])
+
+            if i < len(enemies):
+                enemy_str = str(enemies[i])
+
+            print(f"{player_str:<20}{'':<20}{enemy_str:<20}")        
 
     def update(self):
-        self.table.clear()
-        
-        self.table.add_column("PLAYER NAME",
-            [
-                self.game.player.name
-            ])       
-        self.table.add_column("PLAYER PV",
-            [
-                self.game.player.pv
-            ])
-        self.table.add_column("           ",
-            [
-                " "
-            ])
-        self.table.add_column("ENEMY NAME",
-            [
-                self.game.monster.role
-            ])
-        # self.table.add_rows(
-        #     [
-        #     [self.game.player.name, self.game.player.pv],
-        #     [self.game.monster.role, self.game.monster.pv]
-        #     ]  
-        # )
-        #print(self.game.player)
-        #print(self.game.monster)
-        print(self.table)
+        self.display_players_and_enemies([self.game.player],[self.game.monster])
 
     def display_start(self):
         print("----------")
