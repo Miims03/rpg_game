@@ -92,6 +92,7 @@ class Game():
                     case _:
                         print("MAUVAISE INPUT")
                         pass
+            print("someone just die oO")
                 
 
         # if self.player.role == 'Warrior':
