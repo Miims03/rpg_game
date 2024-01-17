@@ -1,6 +1,7 @@
 from model.game import Game
 #from view.view import View , choice_name , WRONG_INPUT
 from view.view import *
+#from view.main_view import *
 
 ACTIONS_LIST_CONTROLLER = ['start','exit']
 
@@ -11,6 +12,7 @@ class Controller():
 
     def start(self):
         self.game = Game(choice_name())
+        #self.ui_view = MainWindow()
         self.view = View(self.game)
         self.view.display_start()
         #TANT QUE LE JEU NEST PAS FINI
