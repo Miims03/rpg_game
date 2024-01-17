@@ -8,12 +8,13 @@ class Game():
 
     def __init__(self,name):
         self.player = Player(name)
-        self.monster = Monster()
+        self.monster = Monster("monster")
     
 
     def lvl_up(self):
         self.player.lvl += 19
         if(self.player.lvl ==20):
+            
             print("Congrate ! You can now change Sup Class !")
             self.player = self.new_class()
         

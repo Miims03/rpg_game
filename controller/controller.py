@@ -1,36 +1,43 @@
 from model.game import Game
-from view.view import View
+#from view.view import View , choice_name , WRONG_INPUT
+from view.view import *
+
+ACTIONS_LIST_CONTROLLER = ['start','exit']
+
+ACTIONS_LIST_GAME = ['combat','inventory','exit']
 
 #controller.py
 class Controller():      
 
     def start(self):
-        self.game = Game(self.choice_name())
+        self.game = Game(choice_name())
         self.view = View(self.game)
         self.view.display_start()
         #TANT QUE LE JEU NEST PAS FINI
         while self.game.notFinish():
-            action = self.ask_action()
-            if action == 'start':
-                self.game.play()
-                #self.view.update()
-            if action == 'exit':
-                exit()   
-
-    def choice_name(self):
-        name = input("Choice your player name : ")
-        return name
-
-    def ask_action(self):
-        action = input("What do you want to do ? [start/exit] :\n")
-        match action.lower():          
+            # essaye tant que possible de faire ce qui se trouve en dessous :        
+            try :
+                action = self.view.ask_action(ACTIONS_LIST_CONTROLLER)
+                #if fail attribution action = someting like action=None, then go except
+                if action :
+                    self.do_controller_action(action)
+            #j'expect que action = None si ask_action trouve pas ce qui se trouve dans actions_list_controller
+            except Exception :
+                #je passe car self.view.ask_action(ACTIONS_LIST) va déjà se charger de check si c'est bon ou pas, et si pas bon ben il print l'error             
+                pass
+                        
+    def do_controller_action(self,action):
+        match action:
             case 'start':
-                print('start')
-                return 'start'
+                self.game.play()
+                pass
             case 'exit':
-                print('exit')
-                return 'exit'
+                exit()
             case _:
-                print("Faut agiiir, gros , j'ai pas le temps !")
-                return None
+                self.view.display_error(WRONG_INPUT)
+    
+                   
+    
+
+    
         

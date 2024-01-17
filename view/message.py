@@ -1,10 +1,12 @@
 ERROR,SUCCESS,MSG = range(3)
 
+WRONG_INPUT = "WRONG INPUT"
+
+
 class Message():
     def __init__(self,message="",status=MSG) -> None:
         self.message = message
         self.STATUS = status
-        
         
     def bordered_message(self, width=40):
         border = "-" * width
@@ -13,7 +15,7 @@ class Message():
         return padded_message
         
     def __str__(self) -> str:
-        return self.bordered_message()
+        return self.message
     
 
 # def test():
