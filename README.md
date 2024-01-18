@@ -1,6 +1,6 @@
 # RPG Game
 
-## Parce que j'adore les README.md c'est bien connu
+## Parce que j'adore les README.md c'est bien connu (joke ^^)
 
 ## Setup
 
