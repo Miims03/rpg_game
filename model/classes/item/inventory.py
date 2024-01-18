@@ -1,7 +1,8 @@
-from item import *
+from model.classes.item.item import *
 from consumables.consumable import Consumable
 from weapons.weapon import Weapon
 from armors.armor import Armor
+
 class Inventory():
     
     def __init__(self):
@@ -58,4 +59,4 @@ def test():
     i.add_mult_item({itema,itemab,itemabc})
     i.display_inventory()
 
-test()
+#test()

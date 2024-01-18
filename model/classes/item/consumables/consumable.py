@@ -1,4 +1,4 @@
-from item import Item, CONSUMABLE
+from model.classes.item.item import Item, CONSUMABLE
 
 class Consumable(Item):
     

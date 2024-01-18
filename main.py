@@ -4,9 +4,12 @@ from controller.controller import Controller
 #main.py
 def main():
    controller = Controller()
-   controller.start()
+   #controller.start()
+   controller.start2()
+   
 if __name__ == "__main__":
    main()
+
 
 
 

@@ -17,5 +17,3 @@ git clone https://github.com/Miims03/rpg_game
 ```shell
 python.exe main.py
 ```
-
-

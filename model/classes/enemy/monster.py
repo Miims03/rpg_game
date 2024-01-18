@@ -1,5 +1,8 @@
-class Monster:
 
+
+
+class Monster():
+    
     def __init__(self,name):
         self.name = name
         self.role_base = 'Ennemi'

@@ -1,4 +1,4 @@
-from item import Item, ARMOR
+from model.classes.item.item import Item, ARMOR
 
 class Armor(Item):
     
