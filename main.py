@@ -1,7 +1,10 @@
 from controller.controller import Controller
-
-
+from PySide6.QtWidgets import QWidget, QApplication
+from view.inventory_view import InventoryView
+from model.classes.item.inventory import Inventory
+from model.classes.item.item import *
 #main.py
+
 def main():
    controller = Controller()
    #controller.start()
@@ -11,7 +14,34 @@ if __name__ == "__main__":
    main()
 
 
+# def test():
+#     i = Inventory()
+#     itema = Item(name="Plaque Fer",description="Une plaque en Fer classique",item_type=ARMOR)
+#     itemab = Item(name="Epee Fer",description="Une Epee en Fer assez classique",item_type=WEAPON)
+#     itemabc = Item(name="Potion rich en Fer",description="Une potion pour les os fragiles",item_type=CONSUMABLE)
+#     i.add_item(itema)
+#     i.add_item(itemab)
+#     i.add_item(itemabc)
+#     return i
 
+# if __name__ == '__main__':
+#     app = QApplication()
+
+#     # Créer une instance de CellView avec le type de votre choix
+#     # Créer un widget principal pour contenir le layout
+#     #main_widget = QWidget()
+#     #main_widget.setAcceptDrops(True)
+#     i=test()
+#     inventory_widget = InventoryView(i)
+#     #main_widget.setLayout(inventory_widget)
+#     #main_widget.setWindowTitle('Test de InventoryView')
+
+#     # Afficher la fenêtre
+#     #main_widget.show()
+#     inventory_widget.show()
+
+#     # Lancer l'application
+#     exit(app.exec())
 
 # Miims = Player('Miims')
 # Miims.get_lvl()

@@ -1,6 +1,6 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QLabel , QMainWindow , QPushButton , QVBoxLayout , QLineEdit , QHBoxLayout , QWidget
-from game_view import GameWindow
+from view.game_view import GameWindow
 # idem que background-color: green mais en plus clair
 COLOR_STYLE_GREEN = "background-color: rgb(0, 200, 0)" 
 
@@ -53,14 +53,14 @@ class MainWindow(QMainWindow):
         self.central_widget.setLayout(layout)
 
     def show_game_layout(self):
-        self.setCentralWidget(GameWindow())
+        self.setCentralWidget(GameWindow(self))
         
         
 
-if __name__ == '__main__':
-    app = QApplication()
-    # Créer une instance de CellView avec le type de votre choix
-    main_view = MainWindow()
-    main_view.show()
-    # Lancer l'application
-    exit(app.exec())
+# if __name__ == '__main__':
+#     app = QApplication()
+#     # Créer une instance de CellView avec le type de votre choix
+#     main_view = MainWindow()
+#     main_view.show()
+#     # Lancer l'application
+#     exit(app.exec())

@@ -1,62 +1,53 @@
 from model.classes.item.item import *
-from consumables.consumable import Consumable
-from weapons.weapon import Weapon
-from armors.armor import Armor
+
+DEFAULT_MAX_SIZE = 20
+
 
 class Inventory():
     
     def __init__(self):
-        self.armors = [Armor]
-        self.consumables = [Consumable]
-        self.weapons = [Weapon]
+        self.items : dict[:Item] = {}
+        self.size_max =20
 
-    def add_mult_item(self,list):
-        for item in list : 
-            self.add_item(item)
-        pass
-
-    def add_item(self, item : 'Item'):
-        if item.item_type == ARMOR:
-            self.armors.append(item)
-        elif item.item_type == CONSUMABLE:
-            self.consumables.append(item)
-        elif item.item_type == WEAPON:
-            self.weapons.append(item)
+    def add_item(self, item: Item):
+        # Ajoute un item à l'inventaire avec un ID unique
+        if len(self.items)<self.size_max:
+            self.items[item.uid] = item
         else:
-            print(f"Unsupported item type: {item.item_type}. Item not added to the inventory.")
+            raise Exception("Inventory is Full.")
 
-    def remove_item(self, item : 'Item'):
-        if item.item_type == ARMOR and item in self.armors:
-            self.armors.remove(item)
-            print(f"{item.name} removed from the armor inventory.")
-        elif item.item_type == CONSUMABLE and item in self.consumables:
-            self.consumables.remove(item)
-            print(f"{item.name} removed from the consumable inventory.")
-        elif item.item_type == WEAPON and item in self.weapons:
-            self.weapons.remove(item)
-            print(f"{item.name} removed from the weapon inventory.")
+    def get_item(self, item_id):
+        # Recupère un item de l'inventaire en utilisant son ID
+        if self.items[item_id]:
+            return self.items[item_id]
         else:
-            print(f"{item.name} not found in the inventory.")
+            raise Exception(f"L'item avec l'UID {item_id} n'est pas dans l'inventaire.")
+        
+    def get_all_item(self):
+        return self.items
+
+    def remove_item(self, item_id):
+        # Retire un item de l'inventaire en utilisant son ID
+        if self.items[item_id]:
+            del self.items[item_id]
+        else:
+            raise Exception(f"L'item avec l'UID {item_id} n'est pas dans l'inventaire.")
 
     def display_inventory(self):
-        print("Armor Inventory:")
-        for item in self.armors:
-            print(item)
-
-        print("Consumable Inventory:")
-        for item in self.consumables:
-            print(item)
-
-        print("Weapon Inventory:")
-        for item in self.weapons:
-            print(item)
+        # Affiche le contenu de l'inventaire avec les ID
+        print("Inventaire:")
+        for item_id, item in self.items.items():
+            print(f"uID {item_id}: {item}")
         
-def test():
-    i = Inventory()
-    itema = Item(name="Plaque Fer",description="Une plaque en Fer classique",item_type=ARMOR)
-    itemab = Item(name="Epee Fer",description="Une Epee en Fer assez classique",item_type=WEAPON)
-    itemabc = Item(name="Potion rich en Fer",description="Une potion pour les os fragiles",item_type=CONSUMABLE)
-    i.add_mult_item({itema,itemab,itemabc})
-    i.display_inventory()
+# def test():
+#     i = Inventory()
+#     itema = Item(name="Plaque Fer",description="Une plaque en Fer classique",item_type=ARMOR)
+#     itemab = Item(name="Epee Fer",description="Une Epee en Fer assez classique",item_type=WEAPON)
+#     itemabc = Item(name="Potion rich en Fer",description="Une potion pour les os fragiles",item_type=CONSUMABLE)
+#     i.add_item(itema)
+#     i.add_item(itemab)
+#     i.add_item(itemabc)
+#     i.display_inventory()
+#     return i
 
 #test()

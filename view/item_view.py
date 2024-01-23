@@ -1,67 +1,119 @@
 
-from PySide6.QtCore import Qt, QMimeData
-from PySide6.QtWidgets import QLabel, QVBoxLayout, QWidget, QGridLayout , QApplication
-from PySide6.QtGui import QPixmap, QDragEnterEvent, QDropEvent, QMouseEvent, QDrag
+from PySide6.QtCore import Qt, QMimeData , QSize , QRect 
+from PySide6.QtWidgets import QLabel, QGraphicsPixmapItem, QWidget, QPushButton , QGraphicsItem , QHBoxLayout , QToolTip , QBoxLayout
+from PySide6.QtGui import QPixmap, QDragEnterEvent, QDropEvent, QMouseEvent, QDrag , QFont , QColor
+from model.classes.item.item import Item 
+
+
+SIZE_ITEM = 70
 
 PATH_MEAT_LOGO = 'view\\logo\\meat.png'
+PATH_GRASS_LOGO = 'view\\logo\\grass_logo.png'
 
-class ItemView(QWidget):
-    def __init__(self, item=None):
+class CustomToolTip(QToolTip):
+    def __init__(self,widget):
+        super(CustomToolTip,self).__init__()
+        self.widget = widget
+        # Définir la police par défaut pour le tooltip
+        font = QFont("Arial", 25)
+        self.setFont(font)
+        self.item_text = ""
+        # Créer un QGraphicsRectItem
+        self.rect_item = QRect(100, 200, 50, 50)
+        # Définir la bordure noire
+        
+    
+    # def set_text(self,item_text):
+    #     if item_text:
+    #         self.item_text = item_text.replace('|', '\n')
+    #     else:
+    #         self.item_text = 'pas encore choisi : None'
+
+        
+    def show_text(self):
+        self.showText(self.widget.mapToGlobal(self.widget.rect().bottomLeft()), self.item_text, self.widget,self.rect_item,50000)
+    
+
+class ItemView(QLabel):
+    def __init__(self, item : 'Item'=None):
         super().__init__()
         self.item = item
+        self.setContentsMargins(0, 0, 0, 0)
+        self.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.setStyleSheet("border: 1px solid black;")
+        self.setFixedSize(QSize(SIZE_ITEM,SIZE_ITEM))
+        self.setAcceptDrops(True)
         self.create_widgets()
+        self.toolTip = CustomToolTip(self)
+        #c'est possible ça ?
+        #self.connect(#le label self avec l'evenement UnderMouse, pour la fonction hello)
+              
+        
+    def set_text(self,item_text = None):
+        if item_text:
+            return item_text.replace('|', '\n')
+        else:
+            return 'pas encore choisi : None'
 
-    def create_widgets(self):
-        pixmap = QPixmap(PATH_MEAT_LOGO)  # Utilisez le chemin approprié pour l'image de l'item
-        self.image_label = QLabel()
-        self.image_label.setPixmap(pixmap)
-        self.image_label.setScaledContents(True)
+    def create_widgets(self):     
+        
+        #1.charge l'image de l'item 
+        # Utilisez le chemin approprié pour l'image de l'item !!!!
+        #self.pixmap =  QPixmap(PATH_MEAT_LOGO)
+        
+        if self.item:
+            self.setPixmap(QPixmap(PATH_MEAT_LOGO))
+            self.setToolTip(self.set_text(str(self.item)))
+        else:
+            self.setPixmap(QPixmap(PATH_GRASS_LOGO))
+            self.setToolTip(self.set_text())
+        
+        #self.tool = CustomToolTip(self)
+        #self.tool.set_text(str(self.item))
+        
+        #tool.set_custom_tooltip(self.rect)
+        #self.rect.setToolTip("j'ai ici une longue\n description qui peut durée longtemps\n donc vaut mieux check")
+        #self.setToolTip("tessts")
+        #self.button_item.clicked.connect(self.display_text)
+        
+        #self.display_text()   
+       
+    def mouseMoveEvent(self, e):
 
-        layout = QVBoxLayout(self)
-        layout.addWidget(self.image_label)
+        if e.buttons() == Qt.LeftButton:
+            drag = QDrag(self)
+            mime = QMimeData()
+            drag.setMimeData(mime)
 
-        # Connecter les événements de souris
-        self.setMouseTracking(True)
-        self.image_label.mousePressEvent = self.mousePressEvent
-        self.image_label.mouseMoveEvent = self.mouseMoveEvent
+            pixmap = QPixmap(self.size())
+            self.render(pixmap)
+            drag.setPixmap(pixmap)
 
+            drag.exec(Qt.MoveAction)
+    
 
+   
+    # def mouseMoveEvent(self, event):
 
-    # def mousePressEvent(self, event: QMouseEvent):
-    #     if event.button() == Qt.LeftButton:
-    #         # Commencer le drag-and-drop
+    #     if event.buttons() == Qt.MouseButton.LeftButton:
+    #         print("iciii")
     #         drag = QDrag(self)
-    #         mime_data = QMimeData()
-    #         # Ajouter des données spécifiques à l'item ici
-    #         mime_data.setText(self.item.name)
-    #         drag.setMimeData(mime_data)
+    #         mime = QMimeData()
+    #         drag.setMimeData(mime)
+    #         #drag.setPixmap(self.pixmap)
+    #         drag.exec(Qt.MoveAction)
 
-    #         # Définir l'icône de l'objet glissé
-    #         drag.setPixmap(QPixmap(self.item.image_path))
-    #         drag.exec_()
+# if __name__ == '__main__':
+#     app = QApplication()
 
-    # def mouseMoveEvent(self, event: QMouseEvent):
-    #     # Gérer le déplacement de la souris ici (si nécessaire)
-    #     pass
+#     # Créer une instance de CellView avec le type de votre choix
+#     # Créer un widget principal pour contenir le layout
+#     main_widget = QWidget()
+#     main_widget.setLayout(ItemView())
+#     main_widget.setWindowTitle('Test de ItemView')
 
+#     # Afficher la fenêtre
+#     main_widget.show()
 
-if __name__ == '__main__':
-    app = QApplication()
-
-    # Créer une instance de CellView avec le type de votre choix
-    item_view = ItemView()
-
-    # Organiser le widget dans une mise en page (layout)
-    layout = QVBoxLayout()
-    layout.addWidget(item_view)
-
-    # Créer un widget principal pour contenir le layout
-    main_widget = QWidget()
-    main_widget.setLayout(layout)
-    main_widget.setWindowTitle('Test de ItemView')
-
-    # Afficher la fenêtre
-    main_widget.show()
-
-    # Lancer l'application
-    exit(app.exec())
+#     # Lancer l'application
+#     exit(app.exec())

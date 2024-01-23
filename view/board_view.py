@@ -1,7 +1,7 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QLabel , QPushButton , QVBoxLayout , QWidget , QLineEdit , QGridLayout
 from PySide6.QtGui import QPixmap
-from cell_view import CellView
+from view.cell_view import CellView
 
 PATH_GRASS_BACKGROUND = 'view\\logo\\grass_background.png'
 

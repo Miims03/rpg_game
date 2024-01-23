@@ -1,0 +1,103 @@
+@startuml View
+
+class Player {
+  +score: int
+  -use_item() : void
+  -get_item(inventory,item) : Item
+  -add_item(inventory,item) : Item
+  -remove_item(inventory,item) : Item
+}
+
+abstract Character {
+  +name: String
+  +health: int
+}
+
+abstract Item {
+  +itemName: String
+  +itemType: ItemType
+}
+
+class Consumable {
+  +itemAttack: int
+  +itemHeal: int
+}
+
+class Weapon {
+  +itemAttack: int
+  +itemHeal: int
+}
+
+class Armor {
+  +itemArmor: int
+}
+
+class Inventory {
+  -items: List<Item>
+  +capacity: int
+  
+}
+
+class Game {
+  +players: List<Player>
+  +currentLevel: int
+}
+
+class GameView {
+  -game: Game
+  +displayMode: DisplayMode
+}
+
+class InventoryView {
+  -inventory: Inventory
+  // Ajoutez des attributs si nécessaire
+}
+
+class ItemView {
+  -item: Item
+  // Ajoutez des attributs si nécessaire
+}
+
+class Controller {
+  -view : GameView
+  -game : Game
+  +start()
+
+}
+
+enum ItemType {
+  WEAPON,
+  ARMOR,
+  CONSUMABLE
+}
+
+enum DisplayMode {
+  FULL_SCREEN,
+  WINDOWED
+}
+
+
+Character <.. Player
+Player - Game
+
+Item <..Consumable
+Item <.. Weapon
+Item <.. Armor
+
+
+Inventory -- Player
+
+Consumable -- Inventory
+Weapon -- Inventory
+Armor -- Inventory
+
+
+ItemView -- InventoryView
+InventoryView -- GameView
+
+GameView -- Controller
+Game -- Controller
+
+
+
+@enduml

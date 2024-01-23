@@ -1,0 +1,37 @@
+@startuml View
+
+
+abstract Item {
+  +itemName: String
+  +itemType: ItemType
+}
+
+enum WeaponTypeArme{
+  UNE_MAIN,
+  DEUX_MAINS,
+  DISTANCE,
+}
+
+enum WeaponType {
+  COUP_POING=default,
+  HACHE,
+  DAGUE,
+  MARTEAU,
+  LANCE,
+  BATON,
+  EPEE,
+  ARC,
+
+}
+
+class Weapon {
+  +itemAttack: int
+  +itemHeal: int
+}
+
+
+Item --> Weapon
+
+
+
+@enduml

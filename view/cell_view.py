@@ -31,23 +31,23 @@ class CellView(QLabel):
 
         
 
-if __name__ == '__main__':
-    app = QApplication()
+# if __name__ == '__main__':
+#     app = QApplication()
 
-    # Créer une instance de CellView avec le type de votre choix
-    cell_view = CellView(TYPE_GRASS)
+#     # Créer une instance de CellView avec le type de votre choix
+#     cell_view = CellView(TYPE_GRASS)
 
-    # Organiser le widget dans une mise en page (layout)
-    layout = QVBoxLayout()
-    layout.addWidget(cell_view)
+#     # Organiser le widget dans une mise en page (layout)
+#     layout = QVBoxLayout()
+#     layout.addWidget(cell_view)
 
-    # Créer un widget principal pour contenir le layout
-    main_widget = QWidget()
-    main_widget.setLayout(layout)
-    main_widget.setWindowTitle('Test de CellView')
+#     # Créer un widget principal pour contenir le layout
+#     main_widget = QWidget()
+#     main_widget.setLayout(layout)
+#     main_widget.setWindowTitle('Test de CellView')
 
-    # Afficher la fenêtre
-    main_widget.show()
+#     # Afficher la fenêtre
+#     main_widget.show()
 
-    # Lancer l'application
-    exit(app.exec())
+#     # Lancer l'application
+#     exit(app.exec())

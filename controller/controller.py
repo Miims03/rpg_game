@@ -39,9 +39,9 @@ class Controller():
                 self.view.display_error(WRONG_INPUT)
                 
     def start2(self):
-        app = QApplication(sys.argv)
+        app = QApplication()
         self.ui_view = MainWindow()
         window = MainWindow()
         window.show()
-        sys.exit(app.exec())
+        exit(app.exec())
                    
