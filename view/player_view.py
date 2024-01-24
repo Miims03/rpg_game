@@ -20,7 +20,8 @@ class PlayerView(QWidget):
 
     def init_ui(self):
         main_layout = QVBoxLayout(self)
-
+        qFont = QFont("Segoe UI", 12)
+        qFont.setBold(True)
         horizontal_layout = QHBoxLayout()
         main_layout.addLayout(horizontal_layout)
 
@@ -29,7 +30,7 @@ class PlayerView(QWidget):
         horizontal_layout.addLayout(player_layout)
         #name
         self.label_playername = QLabel(self.actor.name, self)
-        self.label_playername.setFont(QFont("Segoe UI", 12))
+        self.label_playername.setFont(qFont)
         self.label_playername.setAlignment(Qt.AlignmentFlag.AlignCenter)
         player_layout.addWidget(self.label_playername)
         #image
@@ -42,9 +43,10 @@ class PlayerView(QWidget):
         self.label_logo_player.setPixmap(self.image)
         
         player_layout.addWidget(self.label_logo_player)
-
-        self.label_lvl = QLabel("LvL", self)
-        self.label_lvl.setFont(QFont("Segoe UI", 12))
+        #lvl
+        self.label_lvl = QLabel('lvl '+str(self.actor.lvl), self)
+        self.label_lvl.setFont(qFont)
+        self.label_lvl.font().setBold(True)
         self.label_lvl.setAlignment(Qt.AlignmentFlag.AlignCenter)
         player_layout.addWidget(self.label_lvl)
 
@@ -56,7 +58,8 @@ class PlayerView(QWidget):
         self.progressBar_pv.setStyleSheet("QProgressBar::chunk {background-color: rgb(0, 170, 0);}")
         self.progressBar_pv.setMaximum(100)
         self.progressBar_pv.setValue(50)
-        self.progressBar_pv.setFont(QFont("Segoe UI", 12))
+        self.progressBar_pv.setFont(qFont)
+        
         self.progressBar_pv.setFormat("%v/%m")
         self.progressBar_pv.setAlignment(Qt.AlignmentFlag.AlignCenter)
         progress_layout.addWidget(self.progressBar_pv)
@@ -65,7 +68,7 @@ class PlayerView(QWidget):
         self.progressBar_mana.setStyleSheet("QProgressBar::chunk {background-color: rgb(0, 170, 255);}")
         self.progressBar_mana.setMaximum(100)
         self.progressBar_mana.setValue(50)
-        self.progressBar_mana.setFont(QFont("Segoe UI", 12))
+        self.progressBar_mana.setFont(qFont)
         self.progressBar_mana.setFormat("%v/%m")
         self.progressBar_mana.setAlignment(Qt.AlignmentFlag.AlignCenter)
         progress_layout.addWidget(self.progressBar_mana)
@@ -74,10 +77,11 @@ class PlayerView(QWidget):
         self.progressBar_stamina.setStyleSheet("QProgressBar::chunk {background-color: rgb(255, 170, 0);}")
         self.progressBar_stamina.setMaximum(100)
         self.progressBar_stamina.setValue(50)
-        self.progressBar_stamina.setFont(QFont("Segoe UI", 12))
+        self.progressBar_stamina.setFont(qFont)
         self.progressBar_stamina.setFormat("%v/%m")
         self.progressBar_stamina.setAlignment(Qt.AlignmentFlag.AlignCenter)
         progress_layout.addWidget(self.progressBar_stamina)
+        
         
         self.setStyleSheet("border: 1px solid black;")
         

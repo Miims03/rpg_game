@@ -7,7 +7,7 @@ from view.player_view import *
 class TestPlayer(unittest.TestCase):
 
     def setUp(self):
-        self.app = QApplication()
+        
         self.player = Player(name="player1")
         self.player.pv_max = 99
         self.player.pv = 99

@@ -4,6 +4,8 @@ from PySide6.QtGui import QPixmap, QDragEnterEvent, QDropEvent, QMouseEvent, QDr
 from model.classes.item.inventory import *
 from view.item_view import ItemView , SIZE_ITEM , Item
 
+ROWS = 5
+COLUMN = 4
 
 def test():
     i = Inventory()
@@ -21,8 +23,9 @@ class InventoryView(QWidget):
     def __init__(self,inventory : 'Inventory' = None):
         super().__init__()
         self.inventory = inventory
-        #self.setFixedSize(QSize(300,300))
+        self.setFixedSize(QSize(SIZE_ITEM*ROWS,SIZE_ITEM*COLUMN))
         self.setAcceptDrops(True)
+        
         self.create_widgets()
         
         
@@ -36,6 +39,7 @@ class InventoryView(QWidget):
         
     def create_widgets(self):
         self.grid = QGridLayout()
+        self.grid.setSpacing(0)
         x = 0
         y = 0
         item_list = list(self.inventory.items.keys())

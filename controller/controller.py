@@ -2,6 +2,8 @@ from model.game import Game
 #from view.view import View , choice_name , WRONG_INPUT
 from view.view import *
 from view.main_view import *
+from view.authentication_view import AuthenticationView
+from PySide6.QtWidgets import QApplication
 
 ACTIONS_LIST_CONTROLLER = ['start','exit']
 
@@ -9,6 +11,7 @@ ACTIONS_LIST_GAME = ['combat','inventory','exit']
 
 #controller.py
 class Controller():      
+    
 
     def start(self):
         self.game = Game(choice_name())
@@ -38,10 +41,26 @@ class Controller():
             case _:
                 self.view.display_error(WRONG_INPUT)
                 
+    def handle_submit_start(self):
+        #TODO !!!
+        if self.auth_dialog.entry.text() == 'admin':
+            self.launch_main_view()
+        else:
+            print('faut ecrire "admin" pour le moment')
+        
+              
+    def launch_main_view(self):
+        self.auth_dialog.close()
+        self.ui_view.show()
+        
     def start2(self):
-        app = QApplication()
+        self.app = QApplication()
+        self.auth_dialog = AuthenticationView()
         self.ui_view = MainWindow()
-        window = MainWindow()
-        window.show()
-        exit(app.exec())
+        self.auth_dialog.start_button.clicked.connect(self.handle_submit_start)
+        self.auth_dialog.show()
+        exit(self.app.exec())
+        
+        
+        
                    

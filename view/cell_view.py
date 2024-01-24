@@ -1,5 +1,5 @@
 
-from PySide6.QtCore import Qt 
+from PySide6.QtCore import Qt , QSize
 from PySide6.QtWidgets import QLabel , QApplication , QVBoxLayout , QWidget , QHBoxLayout
 from PySide6.QtGui import QPixmap
 
@@ -9,6 +9,7 @@ TYPE_STAR = 1
 
 PATH_GRASS_LOGO = 'view\\logo\\grass_logo.png'
 
+SIZE_CELL = 100
 
 class CellView(QLabel):
     
@@ -16,7 +17,8 @@ class CellView(QLabel):
         super().__init__()
         self.type = type
         self.create_widgets()
-        
+        self.setFixedSize(QSize(SIZE_CELL,SIZE_CELL))
+        self.setScaledContents(True)
     
     def create_widgets(self):
         #Une casse a une image
@@ -24,7 +26,7 @@ class CellView(QLabel):
         if not pixmap:
             print("error")
         self.setPixmap(pixmap)
-        self.setScaledContents(True)
+        #
         #for debug
         #self.setStyleSheet("QLabel {""background-color: none;""color : black;""border: 1px solid black;}")
 

@@ -54,21 +54,30 @@ python.exe main.py
   - class PlayerView
   - class MainView
 
-## TODO
+## TODO (dans l'ordre)
 
-- authentication : authentication.py
+- skill : skill.py
+  - Un item(consomable) peu aussi avoir un skill
+  - Un player comme le monstre aura une liste de skill dispo
+
+- classes Healer/Guerrier/Tank/Magicien
+  - competence pour chaque classe
+
+- arbre de competence ?
+
+- authentication : authentication.py -> done
 
 - hotel des ventes : h_d_v.py
 
 - mini map  : mini_map.py
 
-- plateau jeu : board.py
+- plateau jeu : arena.py
 
-- class combat : combat.py
+- class combat : combat.py (skill avant)
 
-- GameView : !!
+- GameView : -> done
 
-- MainView : !!!
+- MainView : -> done
 
 ## IDEA
 
